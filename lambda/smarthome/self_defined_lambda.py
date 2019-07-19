@@ -108,10 +108,52 @@ def delete_thingshadow(thing_name_id):
     
     response = iot_client.delete_thing_shadow(
         thingName=thing_name_id)
-
+#alexa端只更新desired section
 def update_thing_shadow(thing_name_id, **kwargs):
     
-    jstring = json.dumps(
+    # jstring = json.dumps(
+    #     {   "state" : 
+    #         {
+    #             "desired": {
+    #                 "Lights" :{ 
+    #                     "thing name":thing_name_id,
+    #                     "device info": kwargs.get('device_info','default information'),
+    #                     "powerOn":kwargs.get('powerOn','ON'),
+    #                     "brightness":kwargs.get('brightness',55),
+    #                     "value":kwargs.get('color',{'hue': 0,'saturation':1,'brightness':1 }),
+    #                     "colorTemperatureInKelvin":kwargs.get('colorTemperatureInKelvin',3000),
+    #                     "property3" : kwargs.get('property3', {'default property3': 0 }),
+    #                     kwargs.get('deleteDesired','delete') :None
+    #                     },
+    #                 "Switch":{
+    #                     "Switch value":kwargs.get("switch_value","OFF") 
+    #                     },
+    #                 "Lock":{
+    #                     "Lock value": kwargs.get('lock_value','LOCKED')
+    #                     }
+    #             },
+    #             "reported": {
+    #                 "Lights" :{ 
+    #                     "thing name":thing_name_id,
+    #                     "device info": kwargs.get('device_info','default information'),
+    #                     "powerOn":kwargs.get('powerOn','ON'),
+    #                     "brightness" : kwargs.get('brightness',70),
+    #                     "value" : kwargs.get('color',{'hue': 300,'saturation':0.7201,'brightness':0.6523 }),
+    #                     "colorTemperatureInKelvin":kwargs.get('colorTemperatureInKelvin',3000),
+    #                     "property3" : kwargs.get('property3', {'default property3': 0 }),
+    #                     kwargs.get('deleteDesired','delete') :None
+    #                 },
+    #                 "Switch":{
+    #                     "Switch value":kwargs.get("switch_value","OFF") 
+    #                 },
+    #                 "Lock":{
+    #                     "Lock value": kwargs.get('lock_value','LOCKED')
+    #                 }
+    #             }
+    #         }
+    #     }
+    # ) 
+    jstringDesired = json.dumps(
         {   "state" : 
             {
                 "desired": {
@@ -131,7 +173,14 @@ def update_thing_shadow(thing_name_id, **kwargs):
                     "Lock":{
                         "Lock value": kwargs.get('lock_value','LOCKED')
                         }
-                },
+                } 
+            }
+        }
+    ) 
+    #没什么用但是写在这里
+    jstringReported = json.dumps(
+        {   "state" : 
+            {
                 "reported": {
                     "Lights" :{ 
                         "thing name":thing_name_id,
@@ -152,19 +201,20 @@ def update_thing_shadow(thing_name_id, **kwargs):
                 }
             }
         }
-    )    
+    ) 
+
     #comment this line if not need to clean the thingshadow
     # delete_thingshadow("sample-switch")
     
     #update iot thing shadow
     #response = iot_client.update_thing_shadow(thingName = thing_name_id, payload = jstring)
     
-    response = iot_client.update_thing_shadow(thingName = thing_name_id,payload = jstring)
+    response = iot_client.update_thing_shadow(thingName = "esp32",payload = jstringDesired)
 
     #check if the update successful
     #get the streamingBody object
     streamingBody = response["payload"]
-    print(streamingBody);
+    print(streamingBody)
 
     #transfer streamingbody object to dictionary type
     Dic_strbody = json.loads(streamingBody.read())
@@ -215,7 +265,7 @@ def respond_colorControl_dir(request):
     ccr.add_context_property(namespace ='Alexa.ColorController',name='color',value = color_parameter)
     
     return send_response(ccr.get())
-    
+#TODO 记得把所有getThingShadow 都改成从reported中get！ 
 def respond_lockContro_dir(request):
     #get information from request packet
     endpoint_id = request['directive']['endpoint']['endpointId']
@@ -353,6 +403,7 @@ def respond_colorTemperatureControl_dir(request):
 #create state report response
 #state report context property only need to modify three values: namespace(report whitch interface),name(report which attribute in
 #the interface), value(the value of that attribute)   
+#TODO 一定记得把所有get状态的操作都改成从reported中get
 def respond_reportState_dir(request):
 
     #get endpoint id eg.what is the requested endpoint
