@@ -1,0 +1,126 @@
+{
+  "desired": {
+    "Lights": {
+      "thing name ": "sample-light",
+      "device info": "000",
+      "powerOn": "OFF",
+      "brightness": 60,
+      "value": {
+        "value": 0
+      },
+      "property1": {
+        "default property1": 0
+      },
+      "colorTemperatureInKelvin": 3000
+    },
+    "Switch": {
+      "Switch value": "OFF"
+    },
+    "Lock": {
+      "Lock value": "OFF"
+    }
+  },
+  "reported": {
+    "Lights": {
+      "thing name ": "sample-light",
+      "device info": "000",
+      "powerOn": "OFF",
+      "brightness": 60,
+      "value": {
+        "value": 0
+      },
+      "property1": {
+        "default property1": 0
+      },
+      "colorTemperatureInKelvin": 3000
+    },
+    "Switch": {
+      "Switch value": "OFF"
+    },
+    "Lock": {
+      "Lock value": "OFF"
+    }
+  }
+}
+
+
+{
+ "state" : 
+            {
+                "desired": {
+                    "Lights" :{ 
+                        "thing name " : thing_name_id,
+                        "device info": kwargs.get('device_info','default information'),
+                        "powerOn":kwargs.get("powerOn","OFF"),
+                        "brightness":kwargs.get("brightness",70),
+                        "value" : kwargs.get('color', {'hue': 300,'saturation':0.7201,'brightness':0.6523 }),
+                        "colorTemperatureInKelvin" : kwargs.get('colorTemperatureInKelvin', 3000 ),
+                        "property3" : kwargs.get('property3', {'default property3': 0 }),
+                        }
+                }
+            }
+
+}
+
+
+
+
+#get iot desired thing shadow 
+    # if thing_name_id == "sample-switch":       
+    #     jstring = json.dumps(
+    #     {    "state" : 
+    #         {
+    #             "desired": {
+    #                 "Switch":{
+    #                     "Switch value": kwargs.get("switch_value","OFF") 
+    #                 }
+    #             },
+    #             "reported":{}
+    #         }
+    #     })
+    # if thing_name_id == "sample-light":
+        # jstring = json.dumps(
+        # {    "state" : 
+        #     {
+        #         "desired": {
+        #             "Lights" :{ 
+        #                 "thing name " : thing_name_id,
+        #                 "device info": kwargs.get('device_info','default information'),
+        #                 "powerOn":kwargs.get("powerOn","OFF"),
+        #                 "brightness":kwargs.get("brightness",70),
+        #                 "value" : kwargs.get('color', {'hue': 300,'saturation':0.7201,'brightness':0.6523 }),
+        #                 "colorTemperatureInKelvin" : kwargs.get('colorTemperatureInKelvin', 3000 ),
+        #                 "property3" : kwargs.get('property3', {'default property3': 0 }),
+        #             }
+        #         },
+        #         "reported":{}
+        #     }   
+        # })
+    # if thing_name_id == "sample-lock":
+    #     jstring = json.dumps(
+    #     {    "state" : 
+    #         {
+    #             "desired": {
+    #                 "Lock":{
+    #                     "Lock value": kwargs.get('lock_value','LOCKED')
+    #                 }
+    #             },
+    #             "reported":{}
+    #         }
+    #     })
+    # if thing_name_id == 'esp32':
+    #     jstring = json.dumps(
+    #     {    "state" : 
+    #         {
+    #             "desired": {
+    #                 "esp32":{
+    #                     "power state"
+    #                 }
+    #             },
+    #             "reported":{}  
+    #         }
+    #     })
+
+
+
+
