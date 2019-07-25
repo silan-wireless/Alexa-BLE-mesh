@@ -118,7 +118,7 @@ def update_thing_shadow(thing_name_id, **kwargs):
     #                 "Lights" :{ 
     #                     "thing name":thing_name_id,
     #                     "device info": kwargs.get('device_info','default information'),
-    #                     "powerOn":kwargs.get('powerOn','ON'),
+    #                     "ON_OFF":kwargs.get('ON_OFF','ON'),
     #                     "brightness":kwargs.get('brightness',55),
     #                     "value":kwargs.get('color',{'hue': 0,'saturation':1,'brightness':1 }),
     #                     "colorTemperatureInKelvin":kwargs.get('colorTemperatureInKelvin',3000),
@@ -136,7 +136,7 @@ def update_thing_shadow(thing_name_id, **kwargs):
     #                 "Lights" :{ 
     #                     "thing name":thing_name_id,
     #                     "device info": kwargs.get('device_info','default information'),
-    #                     "powerOn":kwargs.get('powerOn','ON'),
+    #                     "ON_OFF":kwargs.get('ON_OFF','ON'),
     #                     "brightness" : kwargs.get('brightness',70),
     #                     "value" : kwargs.get('color',{'hue': 300,'saturation':0.7201,'brightness':0.6523 }),
     #                     "colorTemperatureInKelvin":kwargs.get('colorTemperatureInKelvin',3000),
@@ -157,14 +157,14 @@ def update_thing_shadow(thing_name_id, **kwargs):
         {   "state" : 
             {
                 "desired": {
+                    "Thing name":thing_name_id,
                     "Lights" :{ 
-                        "thing name":thing_name_id,
                         "device info": kwargs.get('device_info','default information'),
-                        "powerOn":kwargs.get('powerOn','ON'),
+                        "ON_OFF":kwargs.get('ON_OFF','ON'),
                         "brightness":kwargs.get('brightness',55),
                         "value":kwargs.get('color',{'hue': 0,'saturation':1,'brightness':1 }),
                         "colorTemperatureInKelvin":kwargs.get('colorTemperatureInKelvin',3000),
-                        "property3" : kwargs.get('property3', {'default property3': 0 }),
+                        "property1" :None,
                         kwargs.get('deleteDesired','delete') :None
                         },
                     "Switch":{
@@ -182,23 +182,23 @@ def update_thing_shadow(thing_name_id, **kwargs):
         {   "state" : 
             {
                 "reported": {
+                    "Thing name":thing_name_id,
                     "Lights" :{ 
-                        "thing name":thing_name_id,
                         "device info": kwargs.get('device_info','default information'),
-                        "powerOn":kwargs.get('powerOn','ON'),
-                        "brightness" : kwargs.get('brightness',70),
-                        "value" : kwargs.get('color',{'hue': 300,'saturation':0.7201,'brightness':0.6523 }),
+                        "ON_OFF":kwargs.get('ON_OFF','ON'),
+                        "brightness":kwargs.get('brightness',55),
+                        "value":kwargs.get('color',{'hue': 0,'saturation':1,'brightness':1 }),
                         "colorTemperatureInKelvin":kwargs.get('colorTemperatureInKelvin',3000),
-                        "property3" : kwargs.get('property3', {'default property3': 0 }),
+                        "property1" :None,
                         kwargs.get('deleteDesired','delete') :None
-                    },
+                        },
                     "Switch":{
                         "Switch value":kwargs.get("switch_value","OFF") 
-                    },
+                        },
                     "Lock":{
                         "Lock value": kwargs.get('lock_value','LOCKED')
-                    }
-                }
+                        }
+                } 
             }
         }
     ) 
@@ -314,17 +314,17 @@ def respond_powerControl_dir(request):
     if(endpoint_id == 'sample-light'):
         switch_value = thingshadow_dic['state']['desired']['Switch']['Switch value']
         thingshadow_updated = update_thing_shadow(thing_name_id = endpoint_id,
-                                                  powerOn = power_state_value,
+                                                  ON_OFF = power_state_value,
                                                   switch_value=switch_value)
     elif(endpoint_id == 'sample-switch-01'):
-        powerOn =  thingshadow_dic['state']['desired']['Lights']['powerOn']
+        ON_OFF =  thingshadow_dic['state']['desired']['Lights']['ON_OFF']
         brightness =  thingshadow_dic['state']['desired']['Lights']['brightness']
         temperature =  thingshadow_dic['state']['desired']['Lights']['colorTemperatureInKelvin']
         value =  thingshadow_dic['state']['desired']['Lights']['value']
         Lock_value =  thingshadow_dic['state']['desired']['Lock']['Lock value']
         thingshadow_updated = update_thing_shadow(thing_name_id = endpoint_id,
                                                   switch_value = power_state_value,
-                                                  powerOn = powerOn,
+                                                  ON_OFF = ON_OFF,
                                                   brightness=brightness,
                                                   colorTemperatureInKelvin=temperature,
                                                   value = value,
@@ -428,7 +428,7 @@ def respond_reportState_dir(request):
         StateReport.add_context_property(
             namespace='Alexa.PowerController',
             name='powerState',
-            value = thingshadow_dic['state']['desired']['Lights']['powerOn']
+            value = thingshadow_dic['state']['desired']['Lights']['ON_OFF']
         )
         #report color values
         hue = thingshadow_dic['state']['desired']['Lights']['value']['hue']
