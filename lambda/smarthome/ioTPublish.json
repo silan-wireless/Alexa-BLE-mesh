@@ -1,0 +1,42 @@
+    # jstring = json.dumps(
+    #     {   "state" : 
+    #         {
+    #             "desired": {
+    #                 "Lights" :{ 
+    #                     "thing name":thing_name_id,
+    #                     "device info": kwargs.get('device_info','default information'),
+    #                     "ON_OFF":kwargs.get('ON_OFF','ON'),
+    #                     "brightness":kwargs.get('brightness',55),
+    #                     "value":kwargs.get('color',{'hue': 0,'saturation':1,'brightness':1 }),
+    #                     "colorTemperatureInKelvin":kwargs.get('colorTemperatureInKelvin',3000),
+    #                     "property3" : kwargs.get('property3', {'default property3': 0 }),
+    #                     kwargs.get('deleteDesired','delete') :None
+    #                     },
+    #                 "Switch":{
+    #                     "Switch value":kwargs.get("switch_value","OFF") 
+    #                     },
+    #                 "Lock":{
+    #                     "Lock value": kwargs.get('lock_value','LOCKED')
+    #                     }
+    #             },
+    #             "reported": {
+    #                 "Lights" :{ 
+    #                     "thing name":thing_name_id,
+    #                     "device info": kwargs.get('device_info','default information'),
+    #                     "ON_OFF":kwargs.get('ON_OFF','ON'),
+    #                     "brightness" : kwargs.get('brightness',70),
+    #                     "value" : kwargs.get('color',{'hue': 300,'saturation':0.7201,'brightness':0.6523 }),
+    #                     "colorTemperatureInKelvin":kwargs.get('colorTemperatureInKelvin',3000),
+    #                     "property3" : kwargs.get('property3', {'default property3': 0 }),
+    #                     kwargs.get('deleteDesired','delete') :None
+    #                 },
+    #                 "Switch":{
+    #                     "Switch value":kwargs.get("switch_value","OFF") 
+    #                 },
+    #                 "Lock":{
+    #                     "Lock value": kwargs.get('lock_value','LOCKED')
+    #                 }
+    #             }
+    #         }
+    #     }
+    # ) 
