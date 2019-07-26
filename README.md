@@ -1,2 +1,2 @@
 # Alexa-esp32freeRTOS-EFR32BG13-Bluetooth-mesh-project
-![image](instructions/img/alexa-sample-smarthome-108x.pnghttps://github.com/sheldon123z/Alexa-esp32freeRTOS-EFR32BG13-Bluetooth-mesh-project/blob/master/project.png)
+![image](https://github.com/sheldon123z/Alexa-esp32freeRTOS-EFR32BG13-Bluetooth-mesh-project/blob/master/project.png)
