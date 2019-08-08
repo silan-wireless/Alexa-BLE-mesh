@@ -428,14 +428,14 @@ def respond_reportState_dir(request):
         StateReport.add_context_property(
             namespace='Alexa.PowerController',
             name='powerState',
-            value = thingshadow_dic['state']['desired']['Lights']['ON_OFF']
+            value = thingshadow_dic['state']['reported']['Lights']['ON_OFF']
         )
         #report color values
-        hue = thingshadow_dic['state']['desired']['Lights']['value']['hue']
+        hue = thingshadow_dic['state']['reported']['Lights']['value']['hue']
       
-        saturation = thingshadow_dic['state']['desired']['Lights']['value']['saturation']
+        saturation = thingshadow_dic['state']['reported']['Lights']['value']['saturation']
        
-        brightness = thingshadow_dic['state']['desired']['Lights']['value']['brightness']
+        brightness = thingshadow_dic['state']['reported']['Lights']['value']['brightness']
         color_parameter = {"hue":hue, "saturation":saturation, "brightness":brightness}
         print("parameter is:{} hue: {}".format(color_parameter,hue))
         StateReport.add_context_property_with_numbers(
@@ -448,13 +448,13 @@ def respond_reportState_dir(request):
         StateReport.add_context_property(
             namespace = 'Alexa.BrightnessController',
             name = 'brightness',
-            value = thingshadow_dic['state']['desired']['Lights']['brightness']
+            value = thingshadow_dic['state']['reported']['Lights']['brightness']
         )
         #report color temp
         # StateReport.add_context_property(
         #     namespace = 'Alexa.ColorTemperatureController',
         #     name = 'colorTemperatureInKelvin',
-        #     value = thingshadow_dic['state']['desired']['Lights']['colorTemperatureInKelvin']
+        #     value = thingshadow_dic['state']['reported']['Lights']['colorTemperatureInKelvin']
         # )
         return send_response(StateReport.get())  
         
@@ -462,14 +462,14 @@ def respond_reportState_dir(request):
         StateReport.add_context_property(
             namespace = 'Alexa.PowerController',
             name='powerState',
-            value= thingshadow_dic['state']['desired']['Switch']['Switch value']
+            value= thingshadow_dic['state']['reported']['Switch']['Switch value']
         )
         return send_response(StateReport.get())  
     if endpoint_id =='sample-lock':
         StateReport.add_context_property(
             namespace = 'Alexa.PowerController',
             name = 'powerState',
-            value = thingshadow_dic['state']['desired']['Lock']['Lock value']
+            value = thingshadow_dic['state']['reported']['Lock']['Lock value']
         )
         StateReport.add_context_property(
             namespace = 'Alexa.EndpointHealth',
@@ -481,7 +481,7 @@ def respond_reportState_dir(request):
         StateReport.add_context_property(
             namespace = 'Alexa.PowerController',
             name = 'powerState',
-            value = thingshadow_dic['state']['desired']['esp32']['power state']
+            value = thingshadow_dic['state']['reported']['esp32']['power state']
         )
         return send_response(StateReport.get())  
         
